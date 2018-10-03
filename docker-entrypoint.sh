@@ -24,7 +24,7 @@ export LDAP_BIND_USER=${LDAP_BIND_USER}
 export LDAP_BIND_PASSWORD=${LDAP_BIND_PASSWORD}
 export USE_PERFLOG=${USE_PERFLOG:0}
 
-chown -R ${WORKER_USERNAME} /data
+chown ${WORKER_USERNAME} /data
 chown -R ${WORKER_USERNAME} /tmp/uploads
 
 if [ "$USE_PERFLOG" = "1" ]; then
