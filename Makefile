@@ -8,7 +8,7 @@ else
 	export VERSION=$(shell git describe --tags --dirty 2>/dev/null || echo unknown)
 endif
 
-export IMAGENAME=jtilander/webdav
+export IMAGENAME=seanhoughton/webdav
 export TAG?=test
 VERBOSE?=1
 WEBDAV_USERNAME?=bob

@@ -22,7 +22,6 @@ RUN mkdir nginx nginx-vts-module
 ENV NGINX_VERSION 1.15.4
 ENV VTS_MODULE_VERSION v0.1.18
 ENV WEBDAV_EXT_SHA 430fd774fe838a04f1a5defbf1dd571d42300cf9
-ENV LDAP_AUTH_SHA 42d195d7a7575ebab1c369ad3fc5d78dc2c2669c
 
 RUN curl -fSsL https://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz | tar -C nginx --strip 1 -xz
 
@@ -31,10 +30,6 @@ RUN curl -fSsL https://github.com/vozlt/nginx-module-vts/archive/${VTS_MODULE_VE
 RUN curl -fSsL https://codeload.github.com/arut/nginx-dav-ext-module/zip/$WEBDAV_EXT_SHA -o /nginx-dav-ext-module.zip \
 	&& unzip -q /nginx-dav-ext-module.zip \
 	&& rm /nginx-dav-ext-module.zip
-
-RUN curl -fSsL https://github.com/kvspb/nginx-auth-ldap/archive/${LDAP_AUTH_SHA}.zip -o /nginx-auth-ldap.zip \
-	&& unzip -q /nginx-auth-ldap.zip \
-	&& rm /nginx-auth-ldap.zip
 
 WORKDIR /nginx
 RUN ./configure \
@@ -55,7 +50,6 @@ RUN ./configure \
 	--group=nginx \
 	--add-module=../nginx-vts-module \
 	--add-module=../nginx-dav-ext-module-$WEBDAV_EXT_SHA \
-	--add-module=../nginx-auth-ldap-${LDAP_AUTH_SHA} \
 	--with-threads \
 	--with-stream_ssl_preread_module \
 	--with-stream_ssl_module \
@@ -122,7 +116,6 @@ COPY nginx.conf.templ /etc/nginx/nginx.conf.templ
 COPY nginx.*.conf.templ /etc/nginx/conf.d/
 
 RUN mkdir -p /cache /log /etc/certs.d /var/log/nginx
-COPY bad.* /etc/certs.d/
 
 ENV WORKER_USERNAME=nginx
 

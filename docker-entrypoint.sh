@@ -2,7 +2,7 @@
 set -e
 
 export VERSION=$(cat /version.txt)
-echo "Now running shoughton/webdav $VERSION"
+echo "Now running seanhoughton/webdav $VERSION"
 
 
 export WEBDAV_USERNAME=${WEBDAV_USERNAME:-guest}
