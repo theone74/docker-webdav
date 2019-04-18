@@ -13,6 +13,11 @@ server {
     autoindex on;
     autoindex_format ${LISTFORMAT};
 
+    location /status {
+        vhost_traffic_status_display;
+        vhost_traffic_status_display_format html;
+    }
+
     location / {
         root                        /data;
         client_body_temp_path       /tmp/uploads;
