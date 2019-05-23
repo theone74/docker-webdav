@@ -11,6 +11,7 @@ export WORKER_COUNT=${WORKER_COUNT:-4}
 export WORKER_CONNECTIONS=${WORKER_CONNECTIONS:-1024}
 export WORKER_USERNAME=${WORKER_USERNAME:-nginx}
 export LISTFORMAT=${LISTFORMAT:-json}
+export LISTENABLED=${LISTENABLED:-on}
 export SENDFILE=${SENDFILE:-on}
 export TCP_NOPUSH=${TCP_NOPUSH:-off}
 export TRUSTED_SUBNET=${TRUSTED_SUBNET:-all}
@@ -47,7 +48,7 @@ else
 	touch /etc/nginx/.htpasswd
 fi
 
-envsubst '${LISTFORMAT} ${LDAP_PORT} ${LDAP_PROTOCOL} ${LDAP_DN} ${LDAP_SERVER} ${LDAP_DOMAIN} ${LDAP_BIND_USER} ${LDAP_BIND_PASSWORD} ${TRUSTED_SUBNET} ${LISTENPORT}' > /etc/nginx/conf.d/default.conf < /etc/nginx/conf.d/${SOURCE_TEMPLATE}
+envsubst '${LISTENABLED} ${LISTFORMAT} ${LDAP_PORT} ${LDAP_PROTOCOL} ${LDAP_DN} ${LDAP_SERVER} ${LDAP_DOMAIN} ${LDAP_BIND_USER} ${LDAP_BIND_PASSWORD} ${TRUSTED_SUBNET} ${LISTENPORT}' > /etc/nginx/conf.d/default.conf < /etc/nginx/conf.d/${SOURCE_TEMPLATE}
 
 if [ "$1" = "nginx" ]; then
 	shift
