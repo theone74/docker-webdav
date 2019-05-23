@@ -10,7 +10,7 @@ server {
     proxy_set_header      X-Forwarded-Proto $scheme;
     port_in_redirect      off;
 
-    autoindex on;
+    autoindex ${LISTENABLED};
     autoindex_format ${LISTFORMAT};
 
     location /status {
